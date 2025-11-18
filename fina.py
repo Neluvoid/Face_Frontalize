@@ -7,7 +7,7 @@ import numpy as np
 from imutils import face_utils
 import gc
 import torch
-PREDICTOR_PATH = "C:\\Users\\wtaki\\Workspace\\FacePokeNoAPI\\shape_predictor_68_face_landmarks.dat"
+PREDICTOR_PATH = "shape_predictor_68_face_landmarks.dat"
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(PREDICTOR_PATH)
@@ -141,9 +141,6 @@ async def main():
                         else:
                             params = {'rotate_pitch': -180 - pitch}
                         buffer = await engine.transform_image(uid=initImage['u'], params=params)
-
-                        with open("OUTPUT.jpg", "wb") as f:
-                            f.write(buffer)
 
                         restored_img = cv2.imdecode(np.frombuffer(buffer, np.uint8), cv2.IMREAD_COLOR)
                         cv2.imshow("OUTPUT", restored_img)
